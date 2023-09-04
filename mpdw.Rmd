@@ -33,7 +33,6 @@ library("TSA")
 library(rio)
 data1 <- import("https://raw.githubusercontent.com/hafizdharka/MPDWT/main/Covid%2019%20Confirmed%20Cases-Kerala.csv")
 data1
-data1
 ```
 
 ## Eksplorasi Data
