@@ -31,7 +31,8 @@ library("TSA")
 ```{r}
 #install.packages("rio") #install jika belum ada
 library(rio)
-data1 <- read.csv("/Users/hafizdharkaputra/Downloads/Covid 19 Confirmed Cases-Kerala.csv")
+data1 <- import("https://raw.githubusercontent.com/hafizdharka/MPDWT/main/Covid%2019%20Confirmed%20Cases-Kerala.csv")
+data1
 ```
 
 ## Eksplorasi Data
