@@ -21,7 +21,7 @@ library(RColorBrewer)
 library(scales)
 ```
 ## Importing data
-The data used below is California Wine Production dataset in 1980-2020. This set comprises four selected variables, namely Tahun (Year), Panen (Harvested Acres), Produksi (Production), and Harga (Price (Dollar/Unit)) which collected in Yolo (a county in California).
+Data yang digunakan adalah Dataset Bajaj Finance daily prices per satu hari. Variabel yang dipilih antara lain adalah Day's open price, Day's high, Day's low price price, dan Volume.
 ```{r}
 databaj <- import("https://raw.github.com/hafizdharka/MPDWT/main/Praktikum%202/BAJFINANCE_day__with_indicators_.csv")
 databaj <- data.frame(databaj$open,databaj$high,databaj$low,as.double(databaj$volume))
