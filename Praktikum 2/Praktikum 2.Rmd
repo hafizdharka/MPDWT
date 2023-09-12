@@ -23,15 +23,10 @@ library(scales)
 ## Importing data
 The data used below is California Wine Production dataset in 1980-2020. This set comprises four selected variables, namely Tahun (Year), Panen (Harvested Acres), Produksi (Production), and Harga (Price (Dollar/Unit)) which collected in Yolo (a county in California).
 ```{r}
-data_winee <- import("https://raw.githubusercontent.com/lutfi-reza/mpdw-lutfi-reza/main/data/data_wine.csv")
-
-flip <- function(data){
-  new <- data[rev(rownames(data)),]
-  rownames(new) <- NULL
-  new
-}
-
-data_wine <- flip(data_winee)
+databaj <- import("https://raw.github.com/hafizdharka/MPDWT/main/Praktikum%202/BAJFINANCE_day__with_indicators_.csv")
+databaj <- data.frame(databaj$open,databaj$high,databaj$low,as.double(databaj$volume))
+colnames(databaj) <- c("open","high","low","volume")
+databaj
 ```
 
 ## Exploratory Analysis on Respose Variable (Harga)
