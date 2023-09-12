@@ -220,7 +220,7 @@ abline(v = tabOpt[tabOpt$SSE==min(tabOpt$SSE),"rho"], lty = 2, col="red",lwd=2)
 text(x=0.852, y=0.2397500, labels = "rho=0.341", cex = 0.8)
 ```
 Perhitungan yang dilakukan aplikasi `R` menunjukkan bahwa nilai $ρ$
-optimum, yaitu saat SSE terkecil terdapat pada nilai $ρ=0.852$. Hal
+optimum, yaitu saat SSE terkecil terdapat pada nilai $ρ=0.858$. Hal
 tersebut juga ditunjukkan pada plot. Selanjutnya, model dapat didapatkan
 dengan mengevaluasi nilai $ρ$ ke dalam fungsi `hildreth.lu.func`, serta
 dilanjutkan dengan pengujian autokorelasi dengan uji Durbin-Watson.
@@ -230,19 +230,19 @@ yang menjadi persamaan sesungguhnya.
 
 ```{r}
 #Model terbaik
-modelHL <- hildreth.lu.func(0.852, model)
+modelHL <- hildreth.lu.func(0.858, model)
 summary(modelHL)
 
 #Transformasi Balik
-cat("y = ", coef(modelHL)[1]/(1-0.852), "+", coef(modelHL)[2],"x1","+", coef(modelHL)[3],"x2","+", coef(modelHL)[4],"x3", sep = "")
+cat("y = ", coef(modelHL)[1]/(1-0.858), "+", coef(modelHL)[2],"x1","+", coef(modelHL)[3],"x2","+", coef(modelHL)[4],"x3", sep = "")
 ```
-Setelah dilakukan tranformasi balik, didapatkan model dengan metode Hildreth-Lu sebagai berikut. $$y_i=-37714.19+19.1659x_t-0.00978165x2-0.0004007806x3$$
+Setelah dilakukan tranformasi balik, didapatkan model dengan metode Hildreth-Lu sebagai berikut. $$y_i=1.612.949+-2.012,931x1+10.611,47x2+-8.749,881x3$$
 
 ```{r}
 #Deteksi autokorelasi
 dwtest(modelHL)
 ```
-Hasil uji Durbin-Watson juga menunjukkan bahwa nilai DW sebesar $1.426$ yang masih kurang dari nilai DU sehingga masih terdapat autokorelasi. Hal ini juga dinyatakan oleh nilai p-value < alpha 5%. 
+Hasil uji Durbin-Watson juga menunjukkan bahwa nilai DW sebesar $2.4776$ yang lebih kurang dari nilai DU sehingga tidak terdapat autokorelasi. Hal ini juga dinyatakan oleh nilai p-value > alpha 5%. 
 
 Terakhir, akan dibandingkan nilai SSE dari ketiga metode (metode awal,
 metode Cochrane-Orcutt, dan Hildreth-Lu).
@@ -251,13 +251,16 @@ metode Cochrane-Orcutt, dan Hildreth-Lu).
 sseModelawal <- anova(model)$`Sum Sq`[-c(1,2,3)]
 sseModelCO <- anova(modelCOmanual)$`Sum Sq`[-c(1,2,3)]
 sseModelHL <- anova(modelHL)$`Sum Sq`[-c(1,2,3)]
-mseModelawal <- sseModelawal/length(data_wine$Harga)
-mseModelCO <- sseModelCO/length(data_wine$Harga)
-mseModelHL <- sseModelHL/length(data_wine$Harga)
+mseModelawal <- sseModelawal/length(databaj$volume)
+mseModelCO <- sseModelCO/length(databaj$volume)
+mseModelHL <- sseModelHL/length(databaj$volume)
 akurasi <- matrix(c(sseModelawal,sseModelCO,sseModelHL,
-                    mseModelawal,mseModelCO,mseModelHL),nrow=2,ncol=3,byrow = T)
+                  mseModelawal,mseModelCO,mseModelHL),nrow=2,ncol=3,byrow=T)
 colnames(akurasi) <- c("Model Awal", "Model Cochrane-Orcutt", "Model Hildreth-Lu")
 row.names(akurasi) <- c("SSE","MSE")
 akurasi
 ```
-Berdasarkan hasil tersebut dapat diketahui bahwa hasil penanganan autokorelasi dengan metode Cochrane-Orcutt dan Hildreth-Lu memiliki SSE yang sama, sebesar $125480.836$ dan lebih baik dibandingkan model awal, yaitu sebesar $403335.477$. Namun, autokorelasi tetap terjadi dan tidak tertangani oleh kedua metode ini.
+Berdasarkan hasil tersebut dapat diketahui bahwa hasil penanganan autokorelasi dengan metode Cochrane-Orcutt dan Hildreth-Lu memiliki SSE yang sama, sebesar $2.827198e+15$ dan lebih baik dibandingkan model awal, yaitu sebesar $9.832651e+15$. Namun, autokorelasi tetap terjadi dan tidak tertangani oleh kedua metode ini.
+
+#Kesimpulan
+Autokorelasi yang terdapat pada data Bajaj Finance Stock terjadi akibat adanya korelasi di antara unsur penyusunnya. Adanya autokorelasi menyebabkan model regresi kurang baik karena akan meingkatkan galatnya. Autokorelasi dapat dideteksi secara eksploratif melalui plot sisaan, ACF, dan PACF, serta dengan uji formal Durbin-Watson. Namun, autokorelasi tersebut dapat ditangani dengan metode Cochrane-Orcutt dan Hildreth-Lu. Kedua metode menghasilkan nilai SSE yang sama, artinya keduanya baik untuk digunakan.
