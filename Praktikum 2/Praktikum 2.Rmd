@@ -118,7 +118,7 @@ Plot antara sisaan vs order menunjukkan adanya autokorelasi karena ada pola anta
 #H1: sisaan tidak mengikuti sebaran normal
 ks.test(sisaan, "pnorm", mean=mean(sisaan), sd=sd(sisaan))
 ```
-Berdasarkan tes normalitas menggunakan Kolmogorov-Smirnov Test didapatkan *p-value* \> $\alpha$ (5%), artinya sisaan menyebar normal.
+Berdasarkan tes normalitas menggunakan Kolmogorov-Smirnov Test didapatkan *p-value* \< $\alpha$ (5%), artinya sisaan tidak menyebar normal.
 
 ```{r}
 #ACF dan PACF identifikasi autokorelasi
@@ -134,7 +134,7 @@ Berdasarkan plot ACF dan PACF, terlihat bahwa bahwa garis melewati batas selang.
 #H1: ada autokorelasi
 dwtest(model)
 ```
-Hasil tes autokorelasi menggunakan Durbin-Watson Test memberikan nilai p-value < alpha 5%, artinya terjadi autokorelasi. Selain itu didapatkan nilai $DW = 0.43763$. Pada analisis ini $n = 41$ dan $k = 3$ sehingga nilai $DL = 1.3480$ dan $DU = 1.6603$. Artinya terjadi autokorelasi positif.
+Hasil tes autokorelasi menggunakan Durbin-Watson Test memberikan nilai p-value < alpha 5%, artinya terjadi autokorelasi. Selain itu didapatkan nilai $DW = 0.41507$. Pada analisis ini $n = 1859$ dan $k = 3$ sehingga nilai $DL = 1.895$ dan $DU = 1.889$. Artinya terjadi autokorelasi positif.
 
 ## Penanganan Autokorelasi
 ### Metode Cochrane-Orcutt
@@ -144,9 +144,9 @@ modelCO<-cochrane.orcutt(model)
 modelCO
 dwtest(modelCO)
 ```
-Model menggunakan Cochrane-Orcutt $$y_i=-37714.925547+19.166264x1_i-0.009780x2_i-0.000401x3_t$$.
+Model menggunakan Cochrane-Orcutt $$y_i=-1.613.255,512-2.012,980x1_i+10.611,953x2_i-8.750,426x3_t$$.
 
-Nilai DW setelah dilakukan penanganan adalah $DW = 1.4258$. Hasil ini menunjukkan nilai DW belum berada dalam selang antara DU \< DW \< 4-DU sehingga masih ada autokorelasi, yaitu autokorelasi positif. 
+Nilai DW setelah dilakukan penanganan adalah $DW = 2.4772$. Hasil ini menunjukkan nilai DW berada dalam selang antara DU \< DW \< 4-DU sehingga tidaka ada autokorelasi 
 
 ```{r}
 #Rho optimum
