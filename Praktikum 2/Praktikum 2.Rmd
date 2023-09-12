@@ -32,11 +32,11 @@ databaj
 ## Exploratory Analysis on Respose Variable (Harga)
 ```{r}
 #Ekplorasi data
-summary(data_wine)
+summary(databaj)
 
 
 # Membuat matriks korelasi
-m <- cor(data_wine) 
+m <- cor(databaj) 
 
 colors <- alpha(colorRampPalette(c("blue", #Warna Bawah
                                    "#dbdbdb", #Warna Tengah
@@ -53,24 +53,35 @@ Matriks korelasi di atas menunjukkan hubungan positif yang kuat antar semua peub
 ### Time Series Plot
 ```{r}
 #Membentuk objek time series
-data_wine.ts <- ts(data_wine$Harga)
+databaj.ts1 <- ts(databaj$open)
+databaj.ts2 <- ts(databaj$high)
+databaj.ts3 <- ts(databaj$low)
+databaj.ts4 <- ts(databaj$volume)
 
 #Plot time series
-ts.plot(data_wine.ts, xlab = "Time Period",
-        ylab = "Harga", 
-        main = "Time Series Plot of Harga")
-points(data_wine.ts)
+ts.plot(databaj.ts1, xlab = "Time Period",
+        ylab = "Open Price", 
+        main = "Time Series Plot of Open Price")
+points(databaj.ts1)
+ts.plot(databaj.ts2, xlab = "Time Period",
+        ylab = "High Price", 
+        main = "Time Series Plot of High Price")
+points(databaj.ts2)
+ts.plot(databaj.ts3, xlab = "Time Period",
+        ylab = "Low Price", 
+        main = "Time Series Plot of Low Price")
+points(databaj.ts3)
 ```
-Plot time series dari data wine berpola tren. Terlihat kenaikan dari tahun ke tahun pada peubah harga. 
+Plot time series dari Variabel Open, High, dan Low. Terlihat kenaikan dari tahun ke tahun pada peubah harga, tetapi di beberapa rentanga ada fase penurunan. 
 
 ## Regresi
 ```{r}
 #Pembuatan Model Regresi
 #model regresi
-model<- lm(Harga~Tahun+Panen+Produksi, data = data_wine)
+model<- lm(volume~open+high+low, data = databaj)
 summary(model)
 ```
-$$y_i = -2.195*10^4+1.122*10^1X1+3.139*10^2X2-3.525*10^3X3$$
+$$y_i = 1.601.012-4.405X1+22.135X2-18.194*10X3$$
 Berdasarkan ringkasan model dapat diketahui bahwa hasil uji F memiliki *p-value* \< $\alpha$ (5%). Artinya, minimal terdapat satu variabel yang berpengaruh nyata terhadap model.
 
 Selanjutnya dapat dilihat juga nilai $R^2=0.7391$. Artinya, sebesar 73.91% keragaman Harga wine dapat dijelaskan oleh peubah Tahun, Panen, dan Produksi. Hasil ini menunjukkan hasil yang bagus, seolah mendapatkan hasil terbaik. Namun, kita perlu melakukan uji terhadap sisaannya seperti berikut ini.
