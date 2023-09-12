@@ -37,7 +37,6 @@ summary(databaj)
 
 # Membuat matriks korelasi
 m <- cor(databaj) 
-
 colors <- alpha(colorRampPalette(c("blue", #Warna Bawah
                                    "#dbdbdb", #Warna Tengah
                                    "red"))(10), #Warna Atas
@@ -110,7 +109,7 @@ plot(seq(1,1859,1), sisaan, col = "steelblue", pch = 20, xlab = "Sisaan", ylab =
 lines(seq(1,1859,1), sisaan, col = "red")
 abline(a = 0, b = 0, lwd = 2)
 ```
-Normal Q-Q Plot menunjukkan bahwa sisaan cenderung menyebar normal. Namun, histogram memperlihatkan sisaan cenderung menjulur ke kanan.
+Normal Q-Q Plot menunjukkan bahwa sisaan cenderung menyebar normal light-tailed. Namun, histogram memperlihatkan sisaan cenderung menjulur ke kanan.
 Plot antara sisaan vs order menunjukkan adanya autokorelasi karena ada pola antar sisaan. 
 
 ## Uji Formal Normality Test
@@ -157,12 +156,12 @@ rho
 
 ```{r}
 #Transformasi Manual
-Harga.trans<- data_wine$Harga[-1]-data_wine$Harga[-41]*rho
-Tahun.trans<- data_wine$Tahun[-1]-data_wine$Tahun[-41]*rho
-Panen.trans<- data_wine$Panen[-1]-data_wine$Panen[-41]*rho
-Produksi.trans<- data_wine$Produksi[-1]-data_wine$Produksi[-41]*rho
+open.trans<- databaj$open[-1]-databaj$open[-1859]*rho
+high.trans<- databaj$high[-1]-databaj$high[-1859]*rho
+low.trans<- databaj$low[-1]-databaj$low[-1859]*rho
+volume.trans<- databaj$volume[-1]-databaj$volume[-1859]*rho
 
-modelCOmanual<- lm(Harga.trans~Tahun.trans+Panen.trans+Produksi.trans)
+modelCOmanual<- lm(volume.trans~open.trans+high.trans+low.trans)
 summary(modelCOmanual)
 ```
 Hasil model transformasi bukan merupakan model sesungguhnya. Koefisien regresi masih perlu dicari kembali mengikuti $β_0^*=β_0+ρ ̂β_0$ dan $β_1^*=β_1$.
@@ -262,6 +261,3 @@ row.names(akurasi) <- c("SSE","MSE")
 akurasi
 ```
 Berdasarkan hasil tersebut dapat diketahui bahwa hasil penanganan autokorelasi dengan metode Cochrane-Orcutt dan Hildreth-Lu memiliki SSE yang sama, sebesar $125480.836$ dan lebih baik dibandingkan model awal, yaitu sebesar $403335.477$. Namun, autokorelasi tetap terjadi dan tidak tertangani oleh kedua metode ini.
-
-# Simpulan
-Autokorelasi yang terdapat pada dataset wine di Yolo, california tahun 1980-2020 terjadi akibat adanya korelasi di antara unsur penyusunnya. Adanya autokorelasi menyebabkan model regresi kurang baik karena akan meingkatkan galatnya. Autokorelasi dapat dideteksi secara eksploratif melalui plot sisaan, ACF, dan PACF, serta dengan uji formal Durbin-Watson. Autokorelasi tersebut tidak dapat ditangani dengan metode Cochrane-Orcutt dan Hildreth-Lu. Kedua metode menghasilkan nilai SSE yang sama.
