@@ -260,7 +260,7 @@ colnames(akurasi) <- c("Model Awal", "Model Cochrane-Orcutt", "Model Hildreth-Lu
 row.names(akurasi) <- c("SSE","MSE")
 akurasi
 ```
-Berdasarkan hasil tersebut dapat diketahui bahwa hasil penanganan autokorelasi dengan metode Cochrane-Orcutt dan Hildreth-Lu memiliki SSE yang sama, sebesar $2.827198e+15$ dan lebih baik dibandingkan model awal, yaitu sebesar $9.832651e+15$. Namun, autokorelasi tetap terjadi dan tidak tertangani oleh kedua metode ini.
+Berdasarkan hasil tersebut dapat diketahui bahwa hasil penanganan autokorelasi dengan metode Cochrane-Orcutt dan Hildreth-Lu memiliki SSE yang sama, sebesar $2.827198e+15$ dan lebih baik dibandingkan model awal, yaitu sebesar $9.832651e+15$.
 
 #Kesimpulan
 Autokorelasi yang terdapat pada data Bajaj Finance Stock terjadi akibat adanya korelasi di antara unsur penyusunnya. Adanya autokorelasi menyebabkan model regresi kurang baik karena akan meingkatkan galatnya. Autokorelasi dapat dideteksi secara eksploratif melalui plot sisaan, ACF, dan PACF, serta dengan uji formal Durbin-Watson. Namun, autokorelasi tersebut dapat ditangani dengan metode Cochrane-Orcutt dan Hildreth-Lu. Kedua metode menghasilkan nilai SSE yang sama, artinya keduanya baik untuk digunakan.
