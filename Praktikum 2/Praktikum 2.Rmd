@@ -1,5 +1,5 @@
 ---
-title: "Latihan 2 MPDW"
+title: "Praktikum 2 MPDW"
 author: "Muhammad Hafizd Harkaputra"
 date: "2023-09-08"
 output: html_document
