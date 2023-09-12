@@ -105,12 +105,12 @@ abline(a = 0, b = 0, lwd = 2)
 #Histogram Sisaan
 hist(sisaan, col = "steelblue")
 
-plot(seq(1,41,1), sisaan, col = "steelblue", pch = 20, xlab = "Sisaan", ylab = "Order", main = "Sisaan vs Order")
+plot(seq(1,1859,1), sisaan, col = "steelblue", pch = 20, xlab = "Sisaan", ylab = "Order", main = "Sisaan vs Order")
 
-lines(seq(1,41,1), sisaan, col = "red")
+lines(seq(1,1859,1), sisaan, col = "red")
 abline(a = 0, b = 0, lwd = 2)
 ```
-Normal Q-Q Plot menunjukkan bahwa sisaan cenderung menyebar normal. Namun, histogram memperlihatkan sisaan cenderung positif skew.
+Normal Q-Q Plot menunjukkan bahwa sisaan cenderung menyebar normal. Namun, histogram memperlihatkan sisaan cenderung menjulur ke kanan.
 Plot antara sisaan vs order menunjukkan adanya autokorelasi karena ada pola antar sisaan. 
 
 ## Uji Formal Normality Test
