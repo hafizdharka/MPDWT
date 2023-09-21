@@ -15,9 +15,6 @@ output:
 
 ```{r, echo=FALSE}
 #PACKAGES
-install.packages("dLagM") #install jika belum ada
-install.packages("dynlm") #install jika belum ada
-install.packages("MLmetrics") #install jika belum ada
 library(dLagM)
 library(dynlm)
 library(MLmetrics)
