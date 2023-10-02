@@ -20,9 +20,9 @@ Pembangkitan data berpola AR, MA, ARMA, dan banyak proses deret waktu lainnya di
 *White noise* dibangkitkan dari suatu peubah acak, umumnya peubah acak normal.
 
 ```{r}
-set.seed(009)
 wn <- rnorm(300)
 ts.plot(wn)
+wn
 ```
 
 Dapat terlihat bahwa *white noise* tidak memiliki autokorelasi dari ACF. Perhatikan bahwa lag ke-0 adalah korelasi observasi ke-t dengan dirinya sendiri. Nilai korelasi tersebut pasti 1. Sebagai alternatif, lag pertama di plot ACF dapat ditetapkan sebagai 1 (alih-alih 0) dengan menambahkan argumen `xlim(1, lag akhir)`. Plot tersebut dapat disandingkan bersamaan dengan membuat matriks $1 \times 2$ dengan `par(mfrow = c(1,2))`.
@@ -46,6 +46,7 @@ $$ Terlihat bahwa $e_t$, atau *white noise*, berperan penting dalam pembangkitan
 Akan dicoba membangkitkan proses MA paling sederhana, yaitu MA(2) dengan $\theta_1 = 0.4$ dan $\theta_2 = 0.6$ sebanyak 300 observasi dan $c=0$. Karena diperlukan satu nilai awal untuk $e_{t-1}$, masukkan nilai pertama white noise sebagai nilai awal tersebut.
 
 ```{r}
+set.seed(009)
 ma <- wn[c(1,2)]
 ```
 

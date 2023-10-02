@@ -1,6 +1,6 @@
 ---
 title: "Tugas Pertemuan 5 MPDW"
-author: "Muhamad Farras Surya Dio Putra"
+author: "Muhammad Hafizd Harakputra"
 date: "2023-10-02"
 output: html_document
 ---
@@ -28,7 +28,7 @@ library("TSA")
 ## Impor Data
 ```{r}
 library(rio)
-dataset = import("https://raw.githubusercontent.com/farrasdp/mpdw/main/Pertemuan%205/dataset%20tugas.csv")
+dataset = import("https://raw.githubusercontent.com/hafizdharka/MPDWT/main/Pertemuan%205/dataset%20tugas.csv")
 dataset
 ```
 
